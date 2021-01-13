@@ -3,8 +3,9 @@
   uses: peter-murray/inactive-users-action@v1
   with:
     token: ${{ secrets.ORGANIZATION_AND_REPO_ACCESS_TOKEN }}
-    organization: octodemo
-    activity_days: 90
+    organization: e-contact
+    activity_days: 180
+    outputDir: reports
 
 - name: Save User Activity Report
   uses: actions/upload-artifact@v2
