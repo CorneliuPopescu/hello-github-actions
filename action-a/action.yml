@@ -1,17 +1,14 @@
-name: "Hello Actions"
-description: "Greet someone"
-author: "octocat@github.com"
+- name: Analyze User Activity
+  id: analyze_user_activity
+  uses: peter-murray/inactive-users-action@v1
+  with:
+    token: ${{ secrets.ORGANIZATION_AND_REPO_ACCESS_TOKEN }}
+    organization: octodemo
+    activity_days: 90
 
-inputs:
-  MY_NAME:
-    description: "Who to greet"
-    required: true
-    default: "World"
-
-runs:
-  using: "docker"
-  image: "Dockerfile"
-
-branding:
-  icon: "mic"
-  color: "purple"
+- name: Save User Activity Report
+  uses: actions/upload-artifact@v2
+  with:
+    name: reports
+    path: |
+      ${{ steps.analyze_user_activity.outputs.report_csv }}
